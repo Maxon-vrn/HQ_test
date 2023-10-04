@@ -1,0 +1,21 @@
+{% extends 'product/base.html' %}
+{% block header %}
+
+
+<title>Урок</title>
+{% endblock header %}
+
+{% block content %}
+<br>
+<div style="text-align:center;">
+    <h1>{{ post.title_lesson }}</h1>
+
+    <p>Оригинальная сслка на видео: {{ post.video|linebreaks }}</p>
+
+    <iframe width="560" height="315" src="{{ post.video }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+
+
+
+</div>
+{% endblock content %}

@@ -1,0 +1,59 @@
+{% extends 'product/base.html' %}
+{% block header %}
+
+
+<title>Главная страница</title>
+{% endblock header %}
+
+{% block content %}
+{% csrf_token %}
+
+<div>
+    <h1 style="text-align:center;">Наши курсы </h1>
+</div>
+
+<table style="">
+    <tr>
+    <th>Направления</th>
+    <th>Курсы</th>
+  </tr>
+    <tr>
+        <td class="table-content" style="width: 20%;text-align:center;">
+            {% if cat_selected == 0 %}
+                <h2>Все категории</h2>
+            {% else %}
+                <h2><a href="{% url 'index' %}">Все категории:</a></h2>
+            {% endif %}
+            {% for value in category  %}
+                {% if value.pk == cat_selected %}
+                    <li><a> {{ value.category }}</a></li>
+                {% else %}
+                    <li><a href="{{ value.get_absolute_url }}"> {{ value.category }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </td>
+        <td style="width: 70%">
+            <ul>
+                {% for product in products %}
+                <li>
+                    <p>Категория: {{ product.cat }}</p>
+                    <p>Дата: {{ product.time_update|date:'d-m-Y H:i:s'}}</p>
+                    <h2>Тема урока: {{ product.lesson }}</h2>
+                    <p>Тема в рамках курса: {{ product.subject }}</p>
+                    <p>Автор работы: {{  product.owner }}</p>
+                    <p><a href="{% url 'lessons' product.lesson_id %}"> Перейти к уроку {{ lessons_id }}</a></p>
+
+                    <hr>
+                </li>
+                {% endfor %}
+            </ul>
+        </td>
+
+    </tr>
+</table>
+
+
+
+
+
+{% endblock content %}

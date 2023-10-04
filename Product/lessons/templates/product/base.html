@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+        <title></title> <!--auto refresh-->
+        <!--путь указываем относительно папки static для подключения стилей css-->
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"><!--mobile-->
+
+
+    <link type = 'text/css' rel="stylesheet" href="{% static 'lesson/css/style.css' %}" />
+
+
+
+        {% block header %} <!--возможность присутствия и подключения блока в хеадер на любой странице-->
+
+        {% endblock header%}
+
+
+        <!--определите ключевые слова для поисковых систем  SEO-->
+        <meta name="keywords" content="Занятия">
+        <meta http-equiv="Refresh" content="50" /><!--авто обновление страницы-->
+
+        <script type="text/javascript" src="{% static 'lesson/js/script.js' %}"></script>
+
+
+</head>
+
+
+<body>
+
+
+
+<div>
+    <nav class="navbar">
+        <div class="container">
+            <a href="" class="navbar-brand">Онлайн курсы</a>
+
+             <div class="navbar-wrap">
+                <ul class="navbar-menu">
+                    <li><a href="{% url 'index' %}">Курсы</a></li>
+                    <li><a href="{% url 'statistic' %}">Статистика</a></li>
+                    <li><a href="{% url 'contact' %}">Контакты</a></li>
+
+                    {% if request.user.is_authenticated %} <!--admin max it's work, user don't work-->
+                        <li>Привет, {{ user.username }} |<a href="{% url 'logout' %} ">Выйти</a></li>
+                        <!-- href="{% url 'logout' %}" самостоятельная страница-->
+                        <!-- href="logout" страница через слеш от предыдущей страницы на сайте-->
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Вход </a>|<a href="{% url 'registration' %}"> Регистрация</a></li>
+                    {% endif %}
+
+                </ul>
+
+                <button style="margin-right: 10px"; type="button"  onclick='' class="callback">Контактный тел.: 8-800-0000-000</button>
+            </div>
+        </div>
+    </nav>
+</div>
+
+{% block content %}
+
+
+
+
+
+{% endblock content %}
+
+
+
+
+
+        <!--bootstrap js,jquery,popper and other information on dockumentation-->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
